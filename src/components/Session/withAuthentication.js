@@ -5,12 +5,14 @@ import { withFirebase } from '../Firebase';
 
 const withAuthentication = Component => {
     class WithAuthentication extends React.Component {
+      
         constructor(props) {
             super(props);
             this.state = {
                 authUser: null,
             };
         }
+      
         componentDidMount() {
             this.listener = this.props.firebase.onAuthUserListener(
                 authUser => {
@@ -21,9 +23,11 @@ const withAuthentication = Component => {
                 }
             );
         }
+      
         componentWillUnmount() {
             this.listener();
         }
+      
         render() {
             return (
                 <AuthUserContext.Provider value={this.state.authUser}>
